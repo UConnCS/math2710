@@ -1,0 +1,240 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{MATH2710 — Portfolio 2.4 - 2.9}
+\author{Mike Medved}
+\date{March 5th, 2023}
+
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amssymb} 
+\usepackage{amsmath}
+\usepackage{lmodern}
+\usepackage{mathtools, nccmath}
+\usepackage{listings}
+\usepackage[margin=1in]{geometry} 
+\usepackage[table,xdraw,dvipsnames]{xcolor}
+\usepackage{tikz}
+
+\usepackage{xparse}
+%
+\DeclarePairedDelimiterX{\set}[1]{\{}{\}}{\setargs{#1}}
+\NewDocumentCommand{\setargs}{>{\SplitArgument{1}{;}}m}
+{\setargsaux#1}
+\NewDocumentCommand{\setargsaux}{mm}
+{\IfNoValueTF{#2}{#1} {#1\,\delimsize|\,\mathopen{}#2}}%{#1\:;\:#2}
+
+\parindent = 0pt
+
+\newtheorem*{thm}{Theorem}
+
+\begin{document}
+
+\maketitle
+
+\section{Biconditional Statements}
+
+% Question 1
+\subsection{Conjunction of Two Conditional Statements}
+
+A biconditional statement involving $P$ and $Q$ takes the form $(P \Rightarrow Q) \land (Q \Rightarrow P)$.
+
+\subsection{Iff Form}
+
+In it's \textit{iff} form, a biconditional statement takes the form $P \iff Q$.
+
+\subsection{Necessary and Sufficient Form}
+
+A statement is said to be both necessary and sufficient if it is $P \iff Q$. Furthermore, $P$ being a sufficient condition for $Q$ implies $P \Rightarrow Q$, whereas $P$ being a necessary condition for $Q$ implies $Q \Rightarrow P$. Thus, being necessary and sufficient is equivalent to saying that $P \iff Q$.
+
+\subsection{Equivalent Form}
+
+A statement is said to be equivalent if it is logically equivalent to another statement, that is, all truth values for the value of $P$ and $Q$ are the same. For example, $P \iff Q$ is equivalent to $(P \Rightarrow Q) \land (Q \Rightarrow P)$.
+
+% Question 3
+\subsection{Truth Table}
+
+% Please add the following required packages to your document preamble:
+% \usepackage[table,xcdraw]{xcolor}
+% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+\begin{table}[!htb]
+    \begin{tabular}{|c|c|c|c|
+    >{\columncolor[HTML]{67FD9A}}c |}
+    \hline
+    \textbf{$P$} & \textbf{$Q$} & \textbf{$P \Rightarrow Q$} & \textbf{$Q \Rightarrow P$} & \textbf{$(P \Rightarrow Q) \land (Q \Rightarrow P)$} \\ \hline
+    T          & T          & T           & T           & T                  \\ \hline
+    F          & F          & T           & T           & T                  \\ \hline
+    T          & F          & F           & T           & F                  \\ \hline
+    F          & T          & T           & F           & F                  \\ \hline
+    \end{tabular}
+\end{table}
+
+\subsection{Proof}
+
+In order to prove a biconditional statement, we must prove both directions of the implication. Thus, we must prove both $P \Rightarrow Q$ and $Q \Rightarrow P$ in order to prove $P \iff Q$.
+
+% Question 2
+\subsection{Examples}
+
+\subsubsection{Iff Form}
+
+\begin{enumerate}
+    \item $P = | x | = 3$, $Q = x \in \left\{-3, 3\right\}$
+    \item $P = n \text{ is } M_6$, $Q = (n \text{ is } M_3) \land (n \text{ is } M_2)$
+\end{enumerate}
+
+$\hfill \break$
+Thus, for both of the above examples, $P \iff Q$.
+
+\subsubsection{Necessary and Sufficient Form}
+
+\begin{enumerate}
+    \item For the matrix $A$ to be invertible, it is necessary and sufficient that $det(A) \not = 0$.
+    \item A necessary and sufficient condition for a triangle $T$ to be right is that the square of one side equals the sum of the squares of the other two sides.
+\end{enumerate}
+
+\subsubsection{Equivalent Form}
+
+\begin{enumerate}
+    \item The matrix $A$ being invertible is equivalent to it's determinant being non-zero.
+    \item The function $f$ having a constant derivative is equivalent to the function being linear.
+\end{enumerate}
+
+\section{Logical Equivalence}
+
+% definition
+\textbf{Definition:} Two statements $P$ and $Q$ are said to be logically equivalent if they have the same truth value for all possible values of $P$ and $Q$.
+
+% Question 4b, 5a, 5b
+\subsection{Compound Statements}
+
+The compound statement $(P \lor Q) \land (\lnot (P \land Q))$ is equivalent to $P \oplus Q$, where $\oplus$ is the exclusive-or (XOR) operator. Thus, the statement equates to ``either $P$ or $Q$, but not both."
+
+$\hfill \break$
+
+Similarly, the compound statement $((\lnot P) \lor Q)$ is equivalent to $\lnot (P \land (\lnot Q))$, which is equivalent to $\lnot (P \land Q)$.
+
+\subsection{De Morgan's Laws for Logic}
+
+In logic, De Morgan's laws are the following two statements:
+
+\begin{enumerate}
+    \item $\lnot (P \land Q) \equiv (\lnot P) \lor (\lnot Q)$
+    \item $\lnot (P \lor Q) \equiv (\lnot P) \land (\lnot Q)$
+\end{enumerate}
+
+\subsubsection{Negation of $P \Rightarrow Q$}
+
+The negation of $P \Rightarrow Q$ is $P \land (\lnot Q)$, this is because applying De Morgan's laws to $P \Rightarrow Q$ yields:
+
+\begin{align*}
+    \lnot (P \Rightarrow Q) &\Rightarrow \lnot ((\lnot P) \lor Q) \\
+    &\Rightarrow (\lnot (\lnot P)) \lor (\lnot Q) \\
+    &= P \land (\lnot Q)
+\end{align*}
+
+\subsubsection{Negation of $\forall x \in X \colon P(x)$}
+
+The negation of $\forall x \in X \colon P(x)$ is $\exists x \in X, \lnot P(x)$.
+
+$\hfill \break \textbf{Examples:}$
+
+\begin{enumerate}
+    \item $P$: ``$\forall x \ge 0, \exists y \in \mathbb{R}, x = y^2$" \\
+    $\lnot P$: ``$\exists x \ge 0, \forall y \in \mathbb{R}, x \not = y^2$"
+
+    \item $Q$: ``$\forall \text{ triangles}, \exists \text{ an angle which is acute}$" \\
+    $\lnot Q$: ``$\exists \text {triangle}, \forall \text{ angles in that triangle are not acute}$"
+\end{enumerate}
+
+\newpage
+\subsubsection{Negation of $\exists x \in X \colon P(x)$}
+
+Conversely, the negation of $\exists x \in X \colon P(x)$ is $\forall x \in X, \lnot P(x)$.
+
+$\hfill \break \textbf{Examples:}$
+
+\begin{enumerate}
+    \item $P$: ``$\exists \text{ function } f, \forall \text{ function } g, f + g = g.$" \\
+    $\lnot P$: ``$\forall \text { function } f, \exists \text{ function } g, f + g \not = g.$"
+
+    \item $Q$: ``$\exists (x, y) \in \mathbb{R}^2, x \cdot y > 0$" \\
+    $\lnot Q$: ``$\forall (x, y) \in \mathbb{R}^2, x \cdot y \not = 0$"
+\end{enumerate}
+
+% Question 7
+\subsubsection{Negation of $\forall x \in X, \exists y \in Y \colon P(x)$}
+
+The negation of $\forall x \in X, \exists y \in Y \colon P(x)$ is $\exists x \in X, \forall y \in Y \colon \lnot P(x)$.
+
+$\hfill \break \textbf{Examples:}$
+
+\begin{enumerate}
+    \item $P$: ``$\forall \epsilon > 0, \exists \delta > 0, \forall x \text{ with } | x | < \delta \colon f(x) > \epsilon$" \\
+    $\lnot P$: ``$\exists \epsilon > 0, \forall \delta > 0, \exists x \text { with } | x | < \delta \colon f(x) \leq \epsilon$"
+
+    \item $Q$: ``$\forall x \in X, \exists y \in Y, \forall z \in Z \colon f(x, y, z) > \delta$" \\
+    $\lnot Q$: ``$\exists x \in X, \forall y \in Y, \exists z \in Z \colon f(x, y, z) \leq \delta$"
+\end{enumerate}
+
+\subsubsection{Negation of $\exists x \in X, \forall y \in Y \colon P(x)$}
+
+The negation of $\exists x \in X, \forall y \in Y \colon P(x)$ is $\forall x \in X, \exists y \in Y \colon P(x)$.
+
+$\hfill \break \textbf{Examples:}$
+
+\begin{enumerate}
+    \item $P$: ``$\exists x \in X, \forall y \in Y, x + y > 0$" \\
+    $\lnot P$: ``$\forall x \in X, \exists y \in Y, x + y \leq 0$"
+
+    \item $Q$: ``$\exists x \in X, \forall y \in Y, x \cdot y = 0$" \\
+    $\lnot Q$: ``$\forall x \in X, \exists y \in Y, x \cdot y \not = 0$"
+\end{enumerate}
+
+% Questions 8, 9
+\subsection{Mechanics of $P(x) \Rightarrow Q(x)$}
+
+There is a hidden ``for all $x$'' before the statement $P(x) \Rightarrow Q(x)$.
+
+\subsubsection{Negation}
+
+The negation of $P(x) \Rightarrow Q(x)$ is $P(x) \land (\lnot Q(x))$.
+
+\subsubsection{Truth Table}
+
+\begin{table}[!htb]
+    \begin{tabular}{|l|l|l|l|}
+    \hline
+    \textbf{$P$} & \textbf{$Q$} & \textbf{$\lnot Q$} & \textbf{$P \land (\lnot Q))$}      \\ \hline
+    T          & T          & F              & \cellcolor[HTML]{67FD9A}F \\ \hline
+    F          & F          & T              & \cellcolor[HTML]{67FD9A}F \\ \hline
+    T          & F          & T              & \cellcolor[HTML]{67FD9A}T \\ \hline
+    F          & T          & F              & \cellcolor[HTML]{67FD9A}F \\ \hline
+    \end{tabular}
+\end{table}
+
+\subsubsection{Every Form of $(x \in X) \Rightarrow Q(x)$}
+
+The ``every form'' of $(x \in X) \Rightarrow Q(x)$ is $\forall x \in X \colon Q(x)$.
+
+\subsubsection{Examples of ``If" form $\rightarrow$ ``Every" form}
+
+\begin{enumerate}
+    \item $P_{\text{if}}$: ``If $f$ is a polynomial of degree $\ge 2$, then $f'$ is not constant." \\
+    $P_{\text{every}}$: ``$(\text{function } f \text{ such that } deg(f) \ge 2) \Rightarrow (f' \text{ is not constant})$"
+
+    \item $P_{\text{if}}$: ``If $P$ is $M_4+1$, then $P$ is odd." \\
+    $P_{\text{every}}$: ``($P$ is $M_4+1$) $\Rightarrow$ ($P$ is odd)"
+\end{enumerate}
+
+\subsubsection{Examples of ``Every" form $\rightarrow$ ``If" form}
+
+\begin{enumerate}
+    \item $P_{\text{every}}$: ``$(f \text{ is continuous on } [a, b]) \Rightarrow (f \text{ is Riemann Integrable on } [a, b])$" \\
+    $P_{\text{if}}$: ``If $f$ is continuous on $[a, b]$, then $f$ is Riemann Integrable on $[a, b].$"
+
+    \item $Q_{\text{every}}$: ``$(n \text{ is } M_4) \Rightarrow (n \text{ is even})$" \\
+    $Q_{\text{if}}$: ``If $n$ is $M_4$, then $n$ is even."
+\end{enumerate}
+
+\end{document}
