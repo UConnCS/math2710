@@ -1,0 +1,36 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{MATH2710 — Portfolio 7.3}
+\author{Mike Medved}
+\date{March 23rd, 2023}
+
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amssymb} 
+\usepackage{amsmath}
+\usepackage{lmodern}
+\usepackage{mathtools, nccmath}
+\usepackage{listings}
+\usepackage[margin=1in]{geometry} 
+\usepackage[table,xdraw,dvipsnames]{xcolor}
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\usepackage{xparse}
+%
+\DeclarePairedDelimiterX{\set}[1]{\{}{\}}{\setargs{#1}}
+\NewDocumentCommand{\setargs}{>{\SplitArgument{1}{;}}m}
+{\setargsaux#1}
+\NewDocumentCommand{\setargsaux}{mm}
+{\IfNoValueTF{#2}{#1} {#1\,\delimsize|\,\mathopen{}#2}}%{#1\:;\:#2}
+
+\parindent = 0pt
+
+\newtheorem*{thm}{Theorem}
+
+\begin{document}
+
+\maketitle
+
+\end{document}

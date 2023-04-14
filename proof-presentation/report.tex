@@ -1,0 +1,101 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{MATH2710 — Proof Presentation}
+\author{Mike Medved}
+\date{April 12th, 2023}
+
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{amssymb} 
+\usepackage{amsmath}
+\usepackage{lmodern}
+\usepackage{mathtools, nccmath}
+\usepackage{listings}
+\usepackage[margin=1in]{geometry} 
+\usepackage[table,xdraw,dvipsnames]{xcolor}
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\usepackage{xparse}
+%
+\DeclarePairedDelimiterX{\set}[1]{\{}{\}}{\setargs{#1}}
+\NewDocumentCommand{\setargs}{>{\SplitArgument{1}{;}}m}
+{\setargsaux#1}
+\NewDocumentCommand{\setargsaux}{mm}
+{\IfNoValueTF{#2}{#1} {#1\,\delimsize|\,\mathopen{}#2}}%{#1\:;\:#2}
+
+\parindent = 0pt
+
+\newtheorem*{thm}{Theorem}
+
+\begin{document}
+
+\maketitle
+
+\section*{Introduction}
+
+In this report, we will prove that the sum of two independent normal random variables is also a normal random variable, such that:
+
+\begin{align*}
+    X \sim \mathcal{N}(\mu_X, \sigma^2_X) \hspace{0.5cm} Y \sim \mathcal{N}(\mu_Y, \sigma^2_Y) \\
+    X + Y = Z \sim \mathcal{N}(\mu_X + \mu_Y, \sigma^2_X + \sigma^2_Y)
+\end{align*}
+
+\section*{Preliminaries}
+
+\subsection*{The Moment Generating Function}
+
+Let $X$ be a random variable with distribution function $F_X(x)$. The moment generating function of $X$ is defined as follows:
+
+\begin{equation*}
+    \phi_X(t) = \mathbb{E} \left[ e^{itX} \right]
+\end{equation*}
+
+$\hfill \break$
+When added, the moment generating functions of two independent random variables $X$ and $Y$ are equal to the product of their individual moment generating functions:
+
+\begin{align*}
+    \phi_{X + Y}(t) &= \phi_X(t) \cdot \phi_Y(t) \\ 
+    &= \mathbb{E} \left[ e^{itX} \right] \cdot \mathbb{E} \left[ e^{itY} \right] \\
+    &= \mathbb{E} \left(e^{it(X+Y)}\right)
+\end{align*}
+
+\newpage
+\section*{Proof}
+
+\begin{thm}
+    Let $X$ and $Y$ be independent normal random variables with mean $\mu$ and variance $\sigma^2$. Prove that the random variable $X + Y = Z$ results in another normal random variable $Z \sim \mathcal{N}(\mu_X + \mu_Y, \sigma^2_X + \sigma^2_Y)$.
+\end{thm}
+
+\begin{proof}
+    Let $X, Y$ be two independent normal random variables such that:
+    
+    \begin{align*}
+        X \sim \mathcal{N}(\mu_X, \sigma^2_X) \hspace{0.5cm} Y \sim \mathcal{N}(\mu_Y, \sigma^2_Y)
+    \end{align*}
+    
+    We aim to prove that the random variable $Z = X + Y$ is also a normal random variable with mean $\mu_X + \mu_Y$ and variance $\sigma^2_X + \sigma^2_Y$.
+    
+    $\hfill \break$
+    In this case, we know that $X, Y$ are both independent of one another, and are normal random variables. Therefore, we can use the sum of their moment generating functions to prove that $Z$ is also a normal random variable.
+
+    $\hfill \break$
+    Let $t \in \mathbb{R}$, then the moment generating function of $X \sim \mathcal{N}(\mu_X, \sigma^2_X)$ is the following:
+
+    \begin{equation*}
+        \phi_X(t) = \mathbb{E} \left[ e^{itX} \right] = \mathbb{E} \left[ e^{it(\mu_X + \sigma_X)} \right] = \text{exp}\left({it\mu_X - \frac{\sigma^2_X t^2}{2}}\right)
+    \end{equation*}
+
+    Therefore, the moment generating function of $X + Y$ must be:
+
+    \begin{align*}
+        \phi_{X+Y}(t) &= \phi_{X}(t) \cdot \phi_{Y}(t) \\
+        &= \text{exp}\left({it\mu_X - \frac{\sigma_X^2 t^2}{2}}\right) \cdot \text{exp}\left({it\mu_Y - \frac{\sigma^2_Y t^2}{2}}\right) \\
+        &= \text{exp}\left({it\left(\mu_X+\mu_Y\right)-\frac{\left(\sigma^2_X + \sigma^2_Y\right) \cdot t^2}{2}}\right) \\
+    \end{align*}
+
+    Hence, the moment generating function of $Z$ has mean $\mu_X + \mu_Y$ and variance $\sigma^2_X + \sigma^2_Y$, and as no two distinct distributions can have the same moment generating function, the distribution of $X+Y$ must be a normal distribution.
+\end{proof}
+
+\end{document}
